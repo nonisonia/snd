@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nominal lain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-[#324154] px-28 py-10 h-[100vh] flex items-center">
+    <div
+      class="container bg-[#597298] rounded-lg flex justify-center items-center"
+      style="height: 100%"
+    >
+      <div
+        class="heading w-8/12 flex flex-col items-center justify-center text-white text-center text-3xl font-mono px-10"
+      >
+        <h1>
+          Masukan Jumlah Nominal <br />
+          Hanya Pecahan 100.000 dan 50.000
+        </h1>
+        <div class="my-10 flex-center gap-3">
+          <input
+            id="input"
+            class="text-center rounded-lg"
+            style="width: 45%; height: 50px; color: black"
+            type="number"
+          />
+          <button onclick="transaksi()" class="text-green-300">ENTER >></button>
+          <button onclick="cancel()" class="text-pink-300">CANCEL >></button>
+        </div>
+        <h1>Tekan "CANCEL" Untuk Membatalkan</h1>
+      </div>
+      <img
+        class="rounded-lg"
+        src="/latihan-ukk2023-main/src/images/ambil-uang.jpg"
+        width="43%"
+        style="margin-bottom: -124px"
+      />
+    </div>
+    <script>
+      const input = document.getElementById("input");
+
+      const saldo = 1000000;
+
+      function transaksi() {
+        //panjang dari inputan harus lebih dari 0
+        if (input.value.length > 0) {
+          //jumlah inputan harus lebih besar daripada saldo
+          if (saldo < input.value) {
+            alert("Saldo anda tidak mencukupi");
+            //jumlah inputan harus bisa dibagi dengan 50000 dan sisa harus 0
+          } else if (
+            input.value % 50000 == 0 &&
+            input.value != 0 &&
+            input.value > 0
+          ) {
+            const konfirm = confirm(
+              `Anda akan menarik uang sebesar ${input.value} saldo anda sebesar ${saldo}`
+            );
+            if (konfirm == true) {
+              location.href = "ambilKartu.html";
+              alert(`sisa saldo anda ${saldo - input.value}`);
+            }
+          } else {
+            alert("nominal tida tersedia");
+          }
+        } else {
+          alert("masukan nominal");
+        }
+      }
+
+      function cancel() {
+        location.href = "ambilkartu.html";
+      }
+    </script>
+  </body>
+</html>
